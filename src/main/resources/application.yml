@@ -1,0 +1,13 @@
+server:
+  port: 8090
+spring:
+  datasource:
+    url: jdbc:mysql://47.94.240.95:3306/bigdata?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: '!@#$%15049225782'
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  type-aliases-package: com.bigdata.display.entity
+  mapper-locations: classpath:com.bigdata.display.map/*Mapper.xml
+

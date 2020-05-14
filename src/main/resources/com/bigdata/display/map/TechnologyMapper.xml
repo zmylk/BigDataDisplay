@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bigdata.display.map.TechnologyMapper">
+
+    <resultMap id="LocalResult" type="com.bigdata.display.pojo.LocalResult">
+        <result column="name" property="name"/>
+        <result column="mycount" property="mycount"/>
+    </resultMap>
+
+    <select id="getTopNResult"  resultMap="LocalResult">
+        SELECT
+            `name` as `name`,
+                click as mycount
+        FROM
+            `technology`
+        order by click desc
+        limit 5
+    </select>
+
+    <select id="getSubjectResult"  resultMap="LocalResult">
+        SELECT
+            `subject` as `name`,
+            count( DISTINCT id ) AS mycount
+        FROM
+            `technology`
+        GROUP BY
+            `subject`
+    </select>
+
+    <select id="getProfessionResult"  resultMap="LocalResult">
+        SELECT
+            `profession` as `name`,
+            count( DISTINCT id ) AS mycount
+        FROM
+            `technology`
+        GROUP BY
+            `profession`
+    </select>
+
+    <select id="getSpecialResult"  resultMap="LocalResult">
+        SELECT
+            `special` as `name`,
+            count( DISTINCT id ) AS mycount
+        FROM
+            `technology`
+        GROUP BY
+            `special`
+    </select>
+</mapper>

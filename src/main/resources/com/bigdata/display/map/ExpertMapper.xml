@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bigdata.display.map.ExpertMapper">
+
+    <resultMap id="LocalResult" type="com.bigdata.display.pojo.LocalResult">
+        <result column="name" property="name"/>
+        <result column="mycount" property="mycount"/>
+    </resultMap>
+
+    <select id="getProvinceResult"  resultMap="LocalResult">
+        SELECT
+            province as `name`,
+            count(DISTINCT `name`) as mycount
+        FROM
+            `expert`
+        GROUP BY province
+    </select>
+
+    <select id="getProfessionResult"  resultMap="LocalResult">
+        SELECT
+            profession as `name`,
+            COUNT(DISTINCT id) as mycount
+        FROM
+            `expert`
+        GROUP BY profession
+    </select>
+
+
+    <select id="getSubjectResult"  resultMap="LocalResult">
+        SELECT
+            `subject` as `name`,
+            COUNT(DISTINCT id) as mycount
+        FROM
+            `expert`
+        GROUP BY `subject`
+    </select>
+</mapper>

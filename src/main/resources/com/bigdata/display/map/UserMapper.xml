@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bigdata.display.map.UserMapper">
+
+    <resultMap id="LocalResult" type="com.bigdata.display.pojo.LocalResult">
+        <result column="name" property="name"/>
+        <result column="mycount" property="mycount"/>
+    </resultMap>
+
+    <select id="getLocalResult"  resultMap="LocalResult">
+        SELECT
+            location as `name`,
+            COUNT(DISTINCT `name`) as mycount
+        FROM
+            `user`
+        group by location
+    </select>
+</mapper>
