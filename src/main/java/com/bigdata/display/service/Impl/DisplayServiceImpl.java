@@ -2,12 +2,16 @@ package com.bigdata.display.service.Impl;
 
 import com.bigdata.display.entity.Expert;
 import com.bigdata.display.entity.Technology;
+import com.bigdata.display.entity.User;
 import com.bigdata.display.map.ExpertMapper;
 import com.bigdata.display.map.TechnologyMapper;
 import com.bigdata.display.map.UserMapper;
 import com.bigdata.display.pojo.LocalResult;
+import com.bigdata.display.pojo.PageResult;
 import com.bigdata.display.service.DisplayService;
 import com.bigdata.display.util.TimeUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -107,9 +111,21 @@ public class DisplayServiceImpl implements DisplayService {
     }
 
     @Override
-    public List<Map<String, Object>> getBigMapInformationInformation() {
+    public List<Map<String, Object>> getBigMapInformationInformation(String province) {
         List<LocalResult> provinceResult = expertMapper.getProvinceResult();
-        return getPieMonth(provinceResult);
+        List<Map<String,Object>> res = new ArrayList<>();
+        for (LocalResult result : provinceResult) {
+            Map<String,Object> tmp = new HashMap<>();
+            tmp.put("name",result.getName());
+            tmp.put("value",result.getMycount());
+            Expert expert = new Expert();
+            expert.setProvince(province);
+            List<Expert> select = expertMapper.select(expert);
+            Expert topOne = findTopOne(select);
+            tmp.put("info",topOne);
+            res.add(tmp);
+        }
+        return res;
     }
 
     @Override
@@ -173,6 +189,40 @@ public class DisplayServiceImpl implements DisplayService {
         return getPieMonth(specialResult);
     }
 
+    @Override
+    public PageResult<Expert> getProvinceExpert(String province,Integer page, Integer row) {
+        PageHelper.startPage(page,row);
+        Expert expert = new Expert();
+        expert.setProvince(province);
+        List<Expert> select = expertMapper.select(expert);
+        PageInfo<Expert> info = new PageInfo<>(select);
+        return  new PageResult<>(info.getTotal(),(long)info.getPages(), select);
+    }
+
+    @Override
+    public PageResult<User> getUser(Integer page, Integer row) {
+        PageHelper.startPage(page,row);
+        List<User> users = userMapper.selectAll();
+        PageInfo<User> info = new PageInfo<>(users);
+        return new PageResult<>(info.getTotal(),(long)info.getPages(),users);
+    }
+
+    @Override
+    public PageResult<Expert> getExpert(Integer page, Integer row) {
+        PageHelper.startPage(page,row);
+        List<Expert> experts = expertMapper.selectAll();
+        PageInfo<Expert> pageInfo = new PageInfo<>(experts);
+        return new PageResult<>(pageInfo.getTotal(),(long)pageInfo.getPages(),experts);
+    }
+
+    @Override
+    public PageResult<Technology> getTechnology(Integer page, Integer row) {
+        PageHelper.startPage(page,row);
+        List<Technology> technologies = technologyMapper.selectAll();
+        PageInfo<Technology> pageInfo = new PageInfo<>(technologies);
+        return new PageResult<>(pageInfo.getTotal(),(long)pageInfo.getPages(),technologies);
+    }
+
     private List<Map<String,Object>> getPieMonth(List<LocalResult> input){
         List<Map<String,Object>> res = new ArrayList<>();
         for (LocalResult result : input) {
@@ -182,5 +232,28 @@ public class DisplayServiceImpl implements DisplayService {
             res.add(tmp);
         }
         return res;
+    }
+
+    private Expert findTopOne(List<Expert> list){
+        int size = list.size();
+        if (size==0){
+            return new Expert();
+        }
+        for (Expert expert : list) {
+            if (expert.getTitle().equals("院士")){
+                return expert;
+            }
+        }
+        for (Expert expert : list) {
+            if (expert.getTitle().equals("博士生导师")){
+                return expert;
+            }
+        }
+        for (Expert expert : list) {
+            if (expert.getTitle().equals("硕士生导师")){
+                return expert;
+            }
+        }
+        return new Expert();
     }
 }

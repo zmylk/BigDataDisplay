@@ -1,9 +1,14 @@
 package com.bigdata.display.controller;
 
+import com.bigdata.display.entity.Expert;
+import com.bigdata.display.entity.Technology;
+import com.bigdata.display.entity.User;
 import com.bigdata.display.pojo.LocalResult;
+import com.bigdata.display.pojo.PageResult;
 import com.bigdata.display.service.DisplayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -114,9 +119,9 @@ public class QueryInterfaceController {
      * 各省份专家数
      * @return
      */
-    @GetMapping("bigMap")
-    public List<Map<String, Object>> getBigMapInformationInformation(){
-        return displayService.getBigMapInformationInformation();
+    @GetMapping("bigMap/{province}")
+    public List<Map<String, Object>> getBigMapInformationInformation(@PathVariable("province") String province){
+        return displayService.getBigMapInformationInformation(province);
     }
 
 
@@ -151,25 +156,8 @@ public class QueryInterfaceController {
      */
     @GetMapping("disciplineDistribution")
     public List<Map<String,Object>> getDisciplineDistributionInformation(){
-        List<Map<String,Object>> res = new ArrayList<>();
-        Map<String,Object> tmp1 = new HashMap<>();
-        tmp1.put("name","农业");
-        tmp1.put("value",5);
-        Map<String,Object> tmp2 = new HashMap<>();
-        tmp2.put("name","畜牧");
-        tmp2.put("value",5);
-        Map<String,Object> tmp3 = new HashMap<>();
-        tmp3.put("name","农机");
-        tmp3.put("value",5);
-        Map<String,Object> tmp4 = new HashMap<>();
-        tmp4.put("name","农业信息化");
-        tmp4.put("value",5);
 
-        res.add(tmp1);
-        res.add(tmp2);
-        res.add(tmp3);
-        res.add(tmp4);
-        return res;
+        return displayService.getDisciplineDistributionInformation();
     }
 
     /**
@@ -178,28 +166,8 @@ public class QueryInterfaceController {
      */
     @GetMapping("professionalDistribution")
     public  List<Map<String,Object>> getProfessionalDistributionInformation(){
-        List<Map<String,Object>> res = new ArrayList<>();
-        Map<String,Object> tmp1 = new HashMap<>();
-        tmp1.put("name","植保");
-        tmp1.put("value",5);
-        Map<String,Object> tmp2 = new HashMap<>();
-        tmp2.put("name","土肥");
-        tmp2.put("value",5);
-        Map<String,Object> tmp3 = new HashMap<>();
-        tmp3.put("name","栽培");
-        tmp3.put("value",5);
-        Map<String,Object> tmp4 = new HashMap<>();
-        tmp4.put("name","育种");
-        tmp4.put("value",5);
-        Map<String,Object> tmp5 = new HashMap<>();
-        tmp5.put("name","数字农业");
-        tmp5.put("value",5);
-        res.add(tmp1);
-        res.add(tmp2);
-        res.add(tmp3);
-        res.add(tmp4);
-        res.add(tmp5);
-        return res;
+
+        return displayService.getProfessionalDistributionInformation();
     }
 
     /**
@@ -208,39 +176,54 @@ public class QueryInterfaceController {
      */
     @GetMapping("specialDistribution")
     public List<Map<String,Object>> getSpecialDistributionInformation(){
-        List<Map<String,Object>> res = new ArrayList<>();
-        Map<String,Object> tmp1 = new HashMap<>();
-        tmp1.put("name","玉米植保");
-        tmp1.put("value",5);
-        Map<String,Object> tmp2 = new HashMap<>();
-        tmp2.put("name","大豆植保");
-        tmp2.put("value",5);
-        Map<String,Object> tmp3 = new HashMap<>();
-        tmp3.put("name","玉米土肥");
-        tmp3.put("value",5);
-        Map<String,Object> tmp4 = new HashMap<>();
-        tmp4.put("name","大豆土肥");
-        tmp4.put("value",5);
-        Map<String,Object> tmp5 = new HashMap<>();
-        tmp5.put("name","玉米栽培");
-        tmp5.put("value",5);
-        Map<String,Object> tmp6 = new HashMap<>();
-        tmp6.put("name","玉米育种");
-        tmp6.put("value",5);
-        Map<String,Object> tmp7 = new HashMap<>();
-        tmp7.put("name","人工智能");
-        tmp7.put("value",5);
-        res.add(tmp1);
-        res.add(tmp2);
-        res.add(tmp3);
-        res.add(tmp4);
-        res.add(tmp5);
-        res.add(tmp6);
-        res.add(tmp7);
 
-        return res;
+        return displayService.getSpecialDistributionInformation();
     }
 
 
+
+
     //饼图结束
+
+    /**
+     * 获取一个省份的专家
+     * @return
+     */
+    @GetMapping("provinceAndExpert/{page}/{row}/{province}")
+    public PageResult<Expert> getProvinceExpert(@PathVariable("province") String province,
+                                                @PathVariable("page") Integer page,
+                                                @PathVariable("row") Integer row){
+
+        return displayService.getProvinceExpert(province,page,row);
+    }
+
+
+    /**
+     * 获取用户列表
+     * @param page
+     * @param row
+     * @return
+     */
+    @GetMapping("getUser/{page}/{row}")
+    public PageResult<User> getUser(@PathVariable("page") Integer page,
+                                    @PathVariable("row") Integer row){
+
+        return displayService.getUser(page,row);
+    }
+
+    @GetMapping("getExpert/{page}/{row}")
+    public PageResult<Expert> getExpert(@PathVariable("page") Integer page,
+                                      @PathVariable("row") Integer row){
+        return displayService.getExpert(page, row);
+    }
+
+
+    @GetMapping("getTechnology/{page}/{row}")
+    public PageResult<Technology> getTechnology(@PathVariable("page") Integer page,
+                                          @PathVariable("row") Integer row){
+
+        return displayService.getTechnology(page, row);
+    }
+
+
 }
