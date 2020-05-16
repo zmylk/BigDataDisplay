@@ -2,6 +2,7 @@ package com.bigdata.display.entity;
 
 import com.bigdata.display.util.TimeUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -22,6 +23,7 @@ public class Expert implements Serializable {
     @Id
     @KeySql(useGeneratedKeys = true)
     @GeneratedValue(generator = "JDBC")
+    @JsonIgnore
     private Integer id;
 
     private String name;

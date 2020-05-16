@@ -1,5 +1,7 @@
 package com.bigdata.display.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -18,6 +20,7 @@ import java.util.Date;
 @Table(name="technology")
 public class Technology implements Serializable {
     @Id
+    @JsonIgnore
     private Integer id;
 
     private String name;
@@ -25,6 +28,7 @@ public class Technology implements Serializable {
     private String profession;
     private String special;
     private Integer click;
+    @JsonFormat(pattern = "yyyy年MM月dd日")
     private Date mydate;
 
 

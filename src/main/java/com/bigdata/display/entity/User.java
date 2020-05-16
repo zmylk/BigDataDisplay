@@ -1,5 +1,7 @@
 package com.bigdata.display.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -21,9 +23,11 @@ public class User implements Serializable {
     @Id
     @KeySql(useGeneratedKeys = true)
     @GeneratedValue(generator = "JDBC")
+    @JsonIgnore
     private Integer id;
     private String name;
     private String sex;
+    @JsonFormat(pattern = "yyyy年MM月dd日")
     private Date birthday;
     private String location;
 }
