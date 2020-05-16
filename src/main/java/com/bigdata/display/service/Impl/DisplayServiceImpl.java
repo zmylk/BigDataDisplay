@@ -49,6 +49,7 @@ public class DisplayServiceImpl implements DisplayService {
         List<Expert> experts = expertMapper.selectAll();
         int[] tmp = new int[5];
         for (Expert expert : experts) {
+
             int peoleAge = TimeUtil.getPeoleAge(expert.getBirthday());
             if (peoleAge>=0&&peoleAge<20){
                 tmp[0]++;
@@ -111,7 +112,7 @@ public class DisplayServiceImpl implements DisplayService {
     }
 
     @Override
-    public List<Map<String, Object>> getBigMapInformationInformation(String province) {
+    public List<Map<String, Object>> getBigMapInformationInformation() {
         List<LocalResult> provinceResult = expertMapper.getProvinceResult();
         List<Map<String,Object>> res = new ArrayList<>();
         for (LocalResult result : provinceResult) {
@@ -119,7 +120,7 @@ public class DisplayServiceImpl implements DisplayService {
             tmp.put("name",result.getName());
             tmp.put("value",result.getMycount());
             Expert expert = new Expert();
-            expert.setProvince(province);
+            expert.setProvince(result.getName());
             List<Expert> select = expertMapper.select(expert);
             Expert topOne = findTopOne(select);
             tmp.put("info",topOne);

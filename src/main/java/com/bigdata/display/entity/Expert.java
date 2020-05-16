@@ -1,5 +1,7 @@
 package com.bigdata.display.entity;
 
+import com.bigdata.display.util.TimeUtil;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -24,6 +26,7 @@ public class Expert implements Serializable {
 
     private String name;
     private String sex;
+    @JsonFormat(pattern = "yyyy年MM月dd日")
     private Date birthday;
 
     private String province;
@@ -33,4 +36,5 @@ public class Expert implements Serializable {
     private String title;
     private String resume;
     private String jobtitle;
+
 }

@@ -22,7 +22,7 @@ public interface DisplayService {
     List<Map<String,Object>> getProfessionInformation();
     List<Map<String,Object>> getSubjectInformation();
     Map getIntermediateInformationInformation();
-    List<Map<String, Object>> getBigMapInformationInformation(String province);
+    List<Map<String, Object>> getBigMapInformationInformation();
     Map getTechnologyNumInformation();
     Map getTechnologyTopNInformation();
     List<Map<String,Object>> getDisciplineDistributionInformation();

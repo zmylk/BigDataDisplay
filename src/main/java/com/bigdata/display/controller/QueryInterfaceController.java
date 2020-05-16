@@ -119,9 +119,9 @@ public class QueryInterfaceController {
      * 各省份专家数
      * @return
      */
-    @GetMapping("bigMap/{province}")
-    public List<Map<String, Object>> getBigMapInformationInformation(@PathVariable("province") String province){
-        return displayService.getBigMapInformationInformation(province);
+    @GetMapping("bigMap")
+    public List<Map<String, Object>> getBigMapInformationInformation(){
+        return displayService.getBigMapInformationInformation();
     }
 
 
