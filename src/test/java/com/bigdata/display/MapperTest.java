@@ -155,9 +155,9 @@ public class MapperTest {
 
     @Test
     public void  test05(){
-        List<Expert> experts = expertMapper.selectAll();
-        for (Expert expert : experts) {
-            System.out.println(expert.getBirthday());
+        List<Expert> expertByAge = expertMapper.getExpertByAge("1975", "1980");
+        for (Expert expert : expertByAge) {
+            System.out.println(expert);
         }
 
     }

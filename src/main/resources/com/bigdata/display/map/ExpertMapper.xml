@@ -7,6 +7,9 @@
         <result column="mycount" property="mycount"/>
     </resultMap>
 
+    <resultMap id="ExpertResult" type="com.bigdata.display.entity.Expert">
+    </resultMap>
+
     <select id="getProvinceResult"  resultMap="LocalResult">
         SELECT
             province as `name`,
@@ -33,5 +36,13 @@
         FROM
             `expert`
         GROUP BY `subject`
+    </select>
+
+    <select id="getExpertByAge"  resultMap="ExpertResult">
+        SELECT
+        *
+        FROM
+        `expert`
+        where birthday &gt;= #{start} and birthday &lt;= #{end}
     </select>
 </mapper>

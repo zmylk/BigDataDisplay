@@ -65,7 +65,7 @@ public class DisplayServiceImpl implements DisplayService {
         }
         List<Map<String,Object>> res = new ArrayList<>();
         Map<String,Object> tmp1 = new HashMap<>();
-        tmp1.put("name","0岁以下");
+        tmp1.put("name","0-20岁");
         tmp1.put("value",tmp[0]);
         Map<String,Object> tmp2 = new HashMap<>();
         tmp2.put("name","20-29岁");
@@ -140,13 +140,13 @@ public class DisplayServiceImpl implements DisplayService {
             int year = TimeUtil.getYear(technology.getMydate());
             if (nowYear==year){
                 int month = TimeUtil.getMonth(technology.getMydate());
-                tmp3[month-1]++;
+                tmp3[month-1]+=technology.getClick();
             }else if (nowYear-1==year){
                 int month = TimeUtil.getMonth(technology.getMydate());
-                tmp2[month-1]++;
+                tmp2[month-1]+=technology.getClick();
             }else if (nowYear-2==year){
                 int month = TimeUtil.getMonth(technology.getMydate());
-                tmp1[month-1]++;
+                tmp1[month-1]+=technology.getClick();
             }
         }
         Map<String,int[]> res = new HashMap<>();
@@ -190,15 +190,15 @@ public class DisplayServiceImpl implements DisplayService {
         return getPieMonth(specialResult);
     }
 
-    @Override
-    public PageResult<Expert> getProvinceExpert(String province,Integer page, Integer row) {
-        PageHelper.startPage(page,row);
-        Expert expert = new Expert();
-        expert.setProvince(province);
-        List<Expert> select = expertMapper.select(expert);
-        PageInfo<Expert> info = new PageInfo<>(select);
-        return  new PageResult<>(info.getTotal(),(long)info.getPages(), select);
-    }
+//    @Override
+//    public PageResult<Expert> getProvinceExpert(String province,Integer page, Integer row) {
+//        PageHelper.startPage(page,row);
+//        Expert expert = new Expert();
+//        expert.setProvince(province);
+//        List<Expert> select = expertMapper.select(expert);
+//        PageInfo<Expert> info = new PageInfo<>(select);
+//        return  new PageResult<>(info.getTotal(),(long)info.getPages(), select);
+//    }
 
     @Override
     public PageResult<User> getUser(Integer page, Integer row) {

@@ -183,20 +183,6 @@ public class QueryInterfaceController {
 
 
 
-    //饼图结束
-
-    /**
-     * 获取一个省份的专家
-     * @return
-     */
-    @GetMapping("provinceAndExpert/{page}/{row}/{province}")
-    public PageResult<Expert> getProvinceExpert(@PathVariable("province") String province,
-                                                @PathVariable("page") Integer page,
-                                                @PathVariable("row") Integer row){
-
-        return displayService.getProvinceExpert(province,page,row);
-    }
-
 
     /**
      * 获取用户列表

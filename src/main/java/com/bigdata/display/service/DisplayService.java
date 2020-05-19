@@ -28,7 +28,7 @@ public interface DisplayService {
     List<Map<String,Object>> getDisciplineDistributionInformation();
     List<Map<String,Object>> getProfessionalDistributionInformation();
     List<Map<String,Object>> getSpecialDistributionInformation();
-    PageResult<Expert> getProvinceExpert(String province, Integer page, Integer row) ;
+//    PageResult<Expert> getProvinceExpert(String province, Integer page, Integer row) ;
     PageResult<User> getUser(Integer page, Integer row);
     PageResult<Expert> getExpert(Integer page, Integer row);
     PageResult<Technology> getTechnology(Integer page, Integer row);

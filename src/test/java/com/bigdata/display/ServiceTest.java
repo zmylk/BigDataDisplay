@@ -43,17 +43,17 @@ public class ServiceTest {
         }
     }
 
-    @Test
-    public void  getProvinceExpert(){
-        PageResult<Expert> e = displayService.getProvinceExpert("黑龙江", 2, 5);
-        List<Expert> items = e.getItems();
-        System.out.println(e.getTotal());
-        System.out.println(e.getTotalPage());
-        for (Expert expert1 : items) {
-            System.out.println(expert1);
-        }
-
-    }
+//    @Test
+//    public void  getProvinceExpert(){
+//        PageResult<Expert> e = displayService.getProvinceExpert("黑龙江", 2, 5);
+//        List<Expert> items = e.getItems();
+//        System.out.println(e.getTotal());
+//        System.out.println(e.getTotalPage());
+//        for (Expert expert1 : items) {
+//            System.out.println(expert1);
+//        }
+//
+//    }
 
     @Test
     public void  getUser(){
