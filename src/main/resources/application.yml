@@ -10,4 +10,5 @@ spring:
 mybatis:
   type-aliases-package: com.bigdata.display.entity
   mapper-locations: classpath:com.bigdata.display.map/*Mapper.xml
+  like17: like17
 
